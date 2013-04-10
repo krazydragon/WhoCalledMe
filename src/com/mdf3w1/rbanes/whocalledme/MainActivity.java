@@ -1,7 +1,18 @@
+/*
+ * project	WhoCalledMe
+ * 
+ * package	com.mdf3w1.rbanes.whocalledme
+ * 
+ * @author	Ronaldo Barnes
+ * 
+ * date		Apr 9, 2013
+ */
 package com.mdf3w1.rbanes.whocalledme;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
@@ -10,6 +21,11 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		//Get phone number dialed
+		Intent intent = getIntent();
+		String phoneNubmer = intent.getDataString();
+		Log.i("PHONE NUMBER",phoneNubmer);
 	}
 
 	@Override
@@ -20,3 +36,4 @@ public class MainActivity extends Activity {
 	}
 
 }
+
