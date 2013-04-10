@@ -15,7 +15,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 
+
+
 public class MainActivity extends Activity {
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,8 @@ public class MainActivity extends Activity {
 		Intent intent = getIntent();
 		String phoneNubmer = intent.getDataString();
 		Log.i("PHONE NUMBER",phoneNubmer);
+		
+		
 	}
 
 	@Override
