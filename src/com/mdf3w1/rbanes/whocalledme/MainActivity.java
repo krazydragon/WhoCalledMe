@@ -9,6 +9,9 @@
  */
 package com.mdf3w1.rbanes.whocalledme;
 
+
+import com.rbarnes.other.SearchService;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,8 +30,16 @@ public class MainActivity extends Activity {
 		
 		//Get phone number dialed
 		Intent intent = getIntent();
-		String phoneNubmer = intent.getDataString();
-		Log.i("PHONE NUMBER",phoneNubmer);
+		String phoneNumber = intent.getDataString();
+		
+		phoneNumber = phoneNumber.replaceAll("[^0-9]+","");
+		
+		Log.i("PHONE NUMBER",phoneNumber);
+		
+		Intent searchIntent = new Intent(getApplicationContext(), SearchService.class);
+		searchIntent.putExtra("phone_number", phoneNumber);
+		
+		startService(searchIntent);
 		
 		
 	}
@@ -39,6 +50,9 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	
+	
 
 }
 

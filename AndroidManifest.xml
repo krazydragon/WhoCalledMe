@@ -48,7 +48,10 @@
          		<data android:scheme="tel" />
       		</intent-filter>
         </activity>
-		
+		<service
+            android:name="com.rbarnes.other.SearchService"
+            android:enabled="true" >
+        </service>
     </application>
 
 </manifest>
