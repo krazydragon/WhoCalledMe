@@ -142,15 +142,16 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f040005;
-        public static final int action_settings=0x7f040008;
+        public static final int LinearLayout2=0x7f040005;
+        public static final int action_settings=0x7f040009;
+        public static final int editText1=0x7f040006;
+        public static final int find_button=0x7f040007;
         public static final int hybrid=0x7f040004;
-        public static final int map=0x7f040007;
+        public static final int map=0x7f040008;
         public static final int none=0x7f040000;
         public static final int normal=0x7f040001;
         public static final int satellite=0x7f040002;
         public static final int terrain=0x7f040003;
-        public static final int textView1=0x7f040006;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -170,6 +171,7 @@ containing a value of this type.
         /**   Requested by string saying which app requested the notification. [CHAR LIMIT=42] 
          */
         public static final int auth_client_requested_by_msg=0x7f050010;
+        public static final int call=0x7f050017;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -223,7 +225,10 @@ containing a value of this type.
         find the service-side assets. [CHAR LIMIT=25] 
          */
         public static final int common_signin_button_text_long=0x7f05000d;
+        public static final int dialed_number=0x7f050016;
+        public static final int find=0x7f050014;
         public static final int hello_world=0x7f050013;
+        public static final int hint=0x7f050015;
     }
     public static final class style {
         /** 

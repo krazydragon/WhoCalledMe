@@ -44,18 +44,24 @@ public class SearchService extends IntentService{
         	String url = "http://api.whitepages.com/reverse_phone/1.0/?phone="+ _phoneNumber +";api_key=6c3c8559c184a9d6025a33d81219174c;outputtype=JSON";
     		URL searchURL = null;
 
-    		try{
-    			searchURL = new URL(url);
-    			_result = WebInterface.getUrlStringResponse(searchURL);
-    			if(_result.length() > 0){
-    				
-    				Log.i("RESULT", _result);
-    				_resultStatus = Activity.RESULT_OK;
-    			}
-    		} catch (MalformedURLException e){
-    			Log.e("BAD URL", "MALFORMED URL");
-    			searchURL = null;
+    		Boolean connected = WebInterface.getConnectionStatus(this);
+    		
+    		if(connected){
+    			try{
+        			searchURL = new URL(url);
+        			_result = WebInterface.getUrlStringResponse(searchURL);
+        			if(_result.length() > 0){
+        				
+        				Log.i("RESULT", _result);
+        				_resultStatus = Activity.RESULT_OK;
+        			}
+        		} catch (MalformedURLException e){
+        			Log.e("BAD URL", "MALFORMED URL");
+        			searchURL = null;
+        		}
     		}
+    		
+    		
     		// Messenger is received and API response is sent back via a message object
         	Messenger messenger = (Messenger) extras.get("messenger");
         	Message msg = Message.obtain();
