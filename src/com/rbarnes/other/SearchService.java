@@ -17,6 +17,8 @@ import android.app.Activity;
 import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
+import android.os.Messenger;
 import android.util.Log;
 
 public class SearchService extends IntentService{
@@ -54,7 +56,17 @@ public class SearchService extends IntentService{
     			Log.e("BAD URL", "MALFORMED URL");
     			searchURL = null;
     		}
-           
+    		// Messenger is received and API response is sent back via a message object
+        	Messenger messenger = (Messenger) extras.get("messenger");
+        	Message msg = Message.obtain();
+        	msg.arg1 = _resultStatus;
+        	msg.obj = _result;
+    
+        	try{
+        		messenger.send(msg);
+        	} catch (android.os.RemoteException e){
+        		Log.e(getClass().getName(), "EXCEPTION sending message", e);
+        	}  
         } 
 		
 	}
