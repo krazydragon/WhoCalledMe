@@ -129,6 +129,7 @@ public class MainActivity extends Activity {
 						//look for error message
 						if(json.getJSONObject("result").getString("message").length() != 1){
 							Log.e("result",json.getJSONObject("result").getString("message"));
+							displayError(json.getJSONObject("result").getString("message"));
 						
 						//display results on the map
 						}else{
@@ -155,7 +156,7 @@ public class MainActivity extends Activity {
 					
 				}else{
 					//No internet
-					displayError();
+					displayError("Network error");
 				}
 		  
 		  }
@@ -188,8 +189,8 @@ public class MainActivity extends Activity {
 		Crouton.makeText(this, "Looking for who called you!", Style.INFO).show(); 
 	}
 	
-	private void displayError(){
-		Crouton.makeText(this, "Network error", Style.ALERT).show();
+	private void displayError(String errorMsg){
+		Crouton.makeText(this, errorMsg, Style.ALERT).show();
 	}
 	
 
