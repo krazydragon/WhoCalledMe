@@ -5,10 +5,12 @@
  * 
  * @author	Ronaldo Barnes
  * 
- * date		Apr 9, 2013
+ * date		Apr 24, 2013
  */
 package com.mdf3w1.rbanes.whocalledme;
 
+
+import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,6 +22,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.mdf3w1.rbanes.whocalledme.R.menu;
 import com.rbarnes.other.SearchService;
 import com.rbarnes.other.WebInterface;
 
@@ -28,6 +31,9 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.SearchManager;
+import android.app.SearchableInfo;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -36,31 +42,32 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 
 
 @SuppressLint("HandlerLeak")
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements SearchView.OnQueryTextListener {
 	
 	
 	private GoogleMap map;
 	String _phoneNumber;
 	String _title;
-	EditText _phoneNumberField;
 	String _address;
 	LatLng _resultGPS;
+	private SearchView numberSearchView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		_phoneNumberField =(EditText)findViewById(R.id.editText1);
-		Button findButton =(Button)findViewById(R.id.find_button);
 		
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
 		
@@ -89,16 +96,8 @@ public class MainActivity extends Activity {
 		}
 		
 		_phoneNumber = dialedNumber;
-		_phoneNumberField.setText(dialedNumber);
 		
-		//manual search
-		findButton.setOnClickListener(new OnClickListener() {
-
-		    public void onClick(View v) {
-		    	lookupNumber(_phoneNumberField.getText().toString());
-
-		    }
-		 });
+		
 		
 		
 	}
@@ -107,10 +106,84 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+		MenuItem searchItem = menu.findItem(R.id.menu_search);
+		 numberSearchView = (SearchView) searchItem.getActionView();
+	        setupSearchView(searchItem);
+	 
 		return true;
 	}
 	
+	@Override
 	
+	public boolean onOptionsItemSelected(MenuItem item){
+	
+		 
+	        
+		
+		switch(item.getItemId()) {
+	        case R.id.item_refresh:
+	        	Crouton.makeText(this, "Refreshing...", Style.INFO).show();
+	            break;
+	        case android.R.id.home:
+	           
+	            Intent intent = new Intent(this, MainActivity.class);
+	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	            startActivity(intent);
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+			}    
+		
+	    return true;
+	}
+	
+	private void setupSearchView(MenuItem searchItem) {
+		 
+        if (isAlwaysExpanded()) {
+        	numberSearchView.setIconifiedByDefault(false);
+        } else {
+            searchItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM
+                    | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+        }
+ 
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        if (searchManager != null) {
+            List<SearchableInfo> searchables = searchManager.getSearchablesInGlobalSearch();
+ 
+            SearchableInfo info = searchManager.getSearchableInfo(getComponentName());
+            for (SearchableInfo inf : searchables) {
+                if (inf.getSuggestAuthority() != null
+                        && inf.getSuggestAuthority().startsWith("applications")) {
+                    info = inf;
+                }
+            }
+            Crouton.makeText(this, "Looking for who called you!", Style.INFO).show();
+            numberSearchView.setSearchableInfo(info);
+        }
+ 
+        numberSearchView.setOnQueryTextListener(this);
+    }
+ 
+    public boolean onQueryTextChange(String newText) {
+    	
+        return false;
+    }
+ 
+    public boolean onQueryTextSubmit(String query) {
+    	lookupNumber(query);
+        return true;
+    }
+ 
+    public boolean onClose() {
+        
+        return false;
+    }
+    protected boolean isAlwaysExpanded() {
+        return true;
+    }
+	     
+	
+
 	//look for information from result to determine location and business
 	@SuppressLint("HandlerLeak")
 	private Handler resultHandler = new Handler(){
@@ -186,7 +259,7 @@ public class MainActivity extends Activity {
 		// Zoom in, animating the camera.
 		map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
     
-		Crouton.makeText(this, "Looking for who called you!", Style.INFO).show(); 
+		 
 	}
 	
 	private void displayError(String errorMsg){

@@ -140,14 +140,16 @@ containing a value of this type.
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int ic_menu_refresh=0x7f020001;
+        public static final int ic_menu_save=0x7f020002;
+        public static final int ic_menu_search=0x7f020003;
     }
     public static final class id {
         public static final int LinearLayout2=0x7f040005;
-        public static final int action_settings=0x7f040009;
-        public static final int editText1=0x7f040006;
-        public static final int find_button=0x7f040007;
         public static final int hybrid=0x7f040004;
-        public static final int map=0x7f040008;
+        public static final int item_refresh=0x7f040008;
+        public static final int map=0x7f040006;
+        public static final int menu_search=0x7f040007;
         public static final int none=0x7f040000;
         public static final int normal=0x7f040001;
         public static final int satellite=0x7f040002;
@@ -160,6 +162,7 @@ containing a value of this type.
         public static final int main=0x7f080000;
     }
     public static final class string {
+        public static final int Search=0x7f050018;
         public static final int action_settings=0x7f050012;
         public static final int app_name=0x7f050011;
         /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=70] 

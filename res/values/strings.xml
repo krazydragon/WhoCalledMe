@@ -8,5 +8,6 @@
     <string name="hint">enter phone number</string>
     <string name="dialed_number"></string>
     <string name="call">Call</string>
+    <string name="Search">Search</string>
 
 </resources>
