@@ -22,7 +22,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.mdf3w1.rbanes.whocalledme.R.menu;
 import com.rbarnes.other.SearchService;
 import com.rbarnes.other.WebInterface;
 
@@ -43,17 +42,12 @@ import android.os.Messenger;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 
 
 @SuppressLint("HandlerLeak")
-public class MainActivity extends Activity implements SearchView.OnQueryTextListener {
+public class MainResultActivity extends Activity implements SearchView.OnQueryTextListener {
 	
 	
 	private GoogleMap map;
@@ -126,7 +120,7 @@ public class MainActivity extends Activity implements SearchView.OnQueryTextList
 	            break;
 	        case android.R.id.home:
 	           
-	            Intent intent = new Intent(this, MainActivity.class);
+	            Intent intent = new Intent(this, MainResultActivity.class);
 	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	            startActivity(intent);
 	            return true;
