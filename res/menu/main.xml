@@ -6,9 +6,9 @@
           android:showAsAction="ifRoom|collapseActionView"
           android:actionViewClass="android.widget.SearchView" />
      <item
-        android:id="@+id/item_refresh"
-        android:icon="@drawable/ic_menu_refresh"
-        android:title="Refresh"
+        android:id="@+id/item_call_log"
+        android:icon="@drawable/page"
+        android:title="@string/recentLog"
         android:showAsAction="ifRoom|withText" />
      
     

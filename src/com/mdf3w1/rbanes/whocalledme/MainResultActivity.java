@@ -115,8 +115,10 @@ public class MainResultActivity extends Activity implements SearchView.OnQueryTe
 	        
 		
 		switch(item.getItemId()) {
-	        case R.id.item_refresh:
-	        	Crouton.makeText(this, "Refreshing...", Style.INFO).show();
+	        case R.id.item_call_log:
+	        	
+	        	Intent otherIntent = new Intent(this, MainListActivity.class);
+	        	startActivity(otherIntent);
 	            break;
 	        case android.R.id.home:
 	           
@@ -173,7 +175,7 @@ public class MainResultActivity extends Activity implements SearchView.OnQueryTe
         return false;
     }
     protected boolean isAlwaysExpanded() {
-        return true;
+        return false;
     }
 	     
 	

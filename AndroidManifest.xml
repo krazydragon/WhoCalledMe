@@ -64,6 +64,17 @@
             android:name="com.rbarnes.other.SearchService"
             android:enabled="true" >
         </service>
+        <receiver android:icon="@drawable/ic_launcher"
+              android:label="@string/app_name"
+              android:name="WidgetProvider">
+      <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+      </intent-filter>
+      <meta-data android:name="android.appwidget.provider"
+                 android:resource="@xml/recent_call_widget" />
+    </receiver>
+    <service android:name="WidgetService"
+             android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>

@@ -13,5 +13,6 @@
     <string name="number">Number</string>
     <string name="num">No:</string>
     <string name="unknown">Unknown</string>
+    <string name="recentLog">Recent Calls</string>
 
 </resources>

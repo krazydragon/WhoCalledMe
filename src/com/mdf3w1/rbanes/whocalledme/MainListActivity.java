@@ -13,7 +13,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import com.rbarnes.other.CallLogHelper;
+
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -25,12 +27,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainListActivity extends ListActivity {
 
@@ -43,6 +41,9 @@ public class MainListActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		ActionBar actionBar = getActionBar();
+	    actionBar.setDisplayHomeAsUpEnabled(true);
+	    
 
 		contactNames = new ArrayList<String>();
 		contactNumbers = new ArrayList<String>();
@@ -55,25 +56,7 @@ public class MainListActivity extends ListActivity {
 		setCallLogs(curLog);
 
 		setListAdapter(new MyAdapter(this, android.R.layout.simple_list_item_1, R.id.nameText, contactNames));
-		ListView lv = getListView();
-		 
-        // listening to single list item on click
-        lv.setOnItemClickListener(new OnItemClickListener() {
-          public void onItemClick(AdapterView<?> parent, View view,
-              int position, long id) {
-               
-              // selected item 
-              String product = ((TextView) view).getText().toString();
-               
-              // Launching new Activity on selecting single List Item
-              Intent i = new Intent(getApplicationContext(), MainResultActivity.class);
-              // sending data to new activity
-              i.putExtra("product", product);
-              startActivity(i);
-             
-          }
-        });
-    
+		
 		
 	}
 
@@ -154,13 +137,24 @@ public class MainListActivity extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater imf = getMenuInflater();
 		imf.inflate(R.menu.main, menu);
+		MenuItem item = menu.findItem(R.id.item_call_log);
+		item.setVisible(false);
+		this.invalidateOptionsMenu();
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
-		return super.onOptionsItemSelected(item);
+		switch(item.getItemId()) {
+		case android.R.id.home:
+        
+			Intent intent = new Intent(this, MainResultActivity.class);
+			startActivity(intent);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 }

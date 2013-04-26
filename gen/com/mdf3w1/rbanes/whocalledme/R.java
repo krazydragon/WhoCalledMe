@@ -143,15 +143,17 @@ containing a value of this type.
         public static final int ic_menu_refresh=0x7f020001;
         public static final int ic_menu_save=0x7f020002;
         public static final int ic_menu_search=0x7f020003;
+        public static final int map=0x7f020004;
+        public static final int page=0x7f020005;
     }
     public static final class id {
         public static final int LinearLayout2=0x7f050005;
         public static final int RelativeLayout1=0x7f05000c;
         public static final int dateText=0x7f05000a;
         public static final int hybrid=0x7f050004;
-        public static final int item_refresh=0x7f05000e;
+        public static final int item_call_log=0x7f05000f;
         public static final int map=0x7f050006;
-        public static final int menu_search=0x7f05000d;
+        public static final int menu_search=0x7f05000e;
         public static final int nameText=0x7f050007;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
@@ -160,11 +162,13 @@ containing a value of this type.
         public static final int terrain=0x7f050003;
         public static final int textView2=0x7f050008;
         public static final int typeText=0x7f05000b;
+        public static final int widget_image=0x7f05000d;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int liststyle=0x7f030001;
         public static final int main=0x7f030002;
+        public static final int widget=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f090000;
@@ -243,6 +247,7 @@ containing a value of this type.
         public static final int hint=0x7f060015;
         public static final int num=0x7f06001b;
         public static final int number=0x7f06001a;
+        public static final int recentLog=0x7f06001d;
         public static final int unknown=0x7f06001c;
     }
     public static final class style {
